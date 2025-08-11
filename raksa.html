@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Raksha Bandhan — Animated Wishes</title>
+<style>
+  /* 🎨 Theme Colors */
+  :root{
+    --accent:#ff6f61;
+    --bg1:#fff6f5;
+    --bg2:#ffe4e1;
+    --text1:#b22222;
+    --text2:#444;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+
+  /* 🃏 Card Container */
+  .card{
+    width:100%;
+    max-width:920px;
+    background: #fff;
+    border-radius:18px;
+    padding:32px;
+    box-shadow:0 12px 40px rgba(10,10,20,0.12);
+    text-align:center;
+    animation: scaleUp 0.7s ease forwards;
+  }
+
+  /* 📄 Pages */
+  .page{ display:none; animation:fadeInUp 600ms ease both; }
+  .page.active{ display:block; }
+
+  /* ✍️ Text Styles */
+  h1{ color:var(--text1); font-size:32px; font-weight:700; margin-bottom:12px; animation: textGlow 2s ease-in-out infinite alternate; }
+  p.lead{ color:var(--text2); font-size:18px; line-height:1.6; margin-bottom:20px; }
+
+  /* 🔘 Buttons */
+  .btn {
+    appearance:none;
+    border:none;
+    background:linear-gradient(90deg,var(--accent),#ea4b3d);
+    color:white;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(230,60,50,0.2);
+    transition:transform .18s ease, box-shadow .18s;
+  }
+  .btn:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 12px 26px rgba(230,60,50,0.3);
+  }
+
+  /* 🎞 Animations */
+  @keyframes fadeInUp{ from{ opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+  @keyframes scaleUp{ from{ transform:scale(0.9);} to{transform:scale(1);} }
+  @keyframes bgPulse{ 0%{background: linear-gradient(135deg,var(--bg1),var(--bg2));} 100%{background: linear-gradient(135deg,#ffe1e6,#ffd6cc);} }
+  @keyframes textGlow{ 0%{text-shadow:0 0 5px rgba(255,111,97,0.5);} 100%{text-shadow:0 0 15px rgba(255,111,97,0.8);} }
+
+  /* 📱 Responsive */
+  @media(max-width:600px){
+    h1{ font-size:24px; }
+    p.lead{ font-size:16px; }
+  }
+</style>
+</head>
+<body>
+  <div class="card" role="main">
+
+    <!-- Page 1 -->
+    <section id="page1" class="page active">
+      <h1>🌸 Welcome, Dear Sister 🌸</h1>
+      <p class="lead">On this Raksha Bandhan, let’s celebrate the beautiful bond of love and protection.</p>
+      <button class="btn" onclick="go(2)">Start</button>
+    </section>
+
+    <!-- Page 2: Wishes -->
+    <section id="page2" class="page" aria-hidden="true">
+      <h1>💌 My Wishes for You 💌</h1>
+      <p class="lead">
+        You are my forever partner in crime, my secret keeper, and my strongest supporter.  
+        Today is all about our special bond… but wait! Every special day deserves a special celebration, right? 🥳  
+        So, I’m expecting the party from your side this time — and it better be grand because I’ll be checking the food menu first! 😋
+      </p>
+      <button class="btn" onclick="go(3)">Next</button>
+    </section>
+
+    <!-- Page 3: Rakhi Tying -->
+    <section id="page3" class="page" aria-hidden="true">
+      <h1>🎀 Tying the Rakhi 🎀</h1>
+      <p class="lead">May this Rakhi always remind us of our unbreakable bond.</p>
+      <img id="rakhiImage" src="rakhiimage.jpg" alt="Tying Rakhi" style="max-width:360px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);">
+      <br><br>
+      <button class="btn" onclick="go(4)">Next</button>
+    </section>
+
+    <!-- Page 4: Thank You -->
+    <section id="page4" class="page" aria-hidden="true">
+      <h1>💖 Thank You 💖</h1>
+      <p class="lead">"Our bond is beyond distance and time. You’re not just my sister, you’re my forever friend."</p>
+      <p style="font-size:20px; font-weight:600;">Happy Raksha Bandhan! 🎉</p>
+      <br>
+      <button class="btn" onclick="exitPage()">Exit</button>
+    </section>
+  </div>
+
+<script>
+  function go(n){
+    const total = 4;
+    for(let i=1;i<=total;i++){
+      const s = document.getElementById('page'+i);
+      if(i===n){
+        s.classList.add('active');
+        s.removeAttribute('aria-hidden');
+      } else {
+        s.classList.remove('active');
+        s.setAttribute('aria-hidden','true');
+      }
+    }
+  }
+
+  function exitPage(){
+    document.body.innerHTML = `
+      <div style="text-align:center; padding:40px; font-family:'Poppins', sans-serif;">
+        <h1 style="color:#ff6f61; font-size:32px;">🎉 Thank you for visiting! 🎉</h1>
+        <p style="font-size:18px; color:#444;">Hope you enjoyed the surprise! 💖</p>
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
